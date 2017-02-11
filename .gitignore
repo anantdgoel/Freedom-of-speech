@@ -92,4 +92,4 @@ ENV/
 google-cloud-sdk/
 
 # Generated audio stuff
-generated-audio/**.mp3
+generated-audio/**
