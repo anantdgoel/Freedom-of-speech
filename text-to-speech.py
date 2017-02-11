@@ -13,4 +13,4 @@ def generateAudio(text, file_name='test', lang='en'):
     tts.save("./generated-audio/{:s}.mp3".format(file_name))
     print('Finished generating audio for text: {:s}'.format(text))
 
-generateAudio("Hello World")
+generateAudio("Hello World. My name is Minh Hoang.")
