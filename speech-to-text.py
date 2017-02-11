@@ -11,7 +11,7 @@ video_file = os.path.join(
     'resources',
     'test.mp4')
 
-command = "ffmpeg -i "+video_file+" -ab 160k -ac 2 -ar 44100 -vn audio.wav"
+command = "ffmpeg -i "+video_file+" -ab 160k -ac 2 -ar 44100 -vn audio.raw"
 
 subprocess.call(command, shell=True)
 
