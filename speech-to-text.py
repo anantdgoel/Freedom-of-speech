@@ -4,17 +4,28 @@ import os
 # Imports the Google Cloud client library
 from google.cloud import speech
 
+import subprocess
+
+video_file = os.path.join(
+    os.path.dirname(__file__),
+    'resources',
+    'test.mp4')
+
+command = "ffmpeg -i "+video_file+" -ab 160k -ac 2 -ar 44100 -vn audio.wav"
+
+subprocess.call(command, shell=True)
+
 # Instantiates a client
 speech_client = speech.Client()
 
 # The name of the audio file to transcribe
-file_name = os.path.join(
+audio_file = os.path.join(
     os.path.dirname(__file__),
     'resources',
     'audio.raw')
 
 # Loads the audio into memory
-with io.open(file_name, 'rb') as audio_file:
+with io.open(audio_file, 'rb') as audio_file:
     content = audio_file.read()
     audio_sample = speech_client.sample(
         content,
