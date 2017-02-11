@@ -1,46 +1,32 @@
-import io
 import os
-
-# Imports the Google Cloud client library
-from google.cloud import speech
-
+import json
+from os.path import join, dirname
+from watson_developer_cloud import SpeechToTextV1
 import subprocess
 
-# video_file = os.path.join(
-#     os.path.dirname(__file__),
-#     'resources',
-#     'test.mp4')
-#
-# command = "ffmpeg -i "+video_file+" -ab 160k -ac 2 -ar 44100 -vn ./resources/audio.wav"
-#
-# subprocess.call(command, shell=True)
-#
-# command = "ffmpeg -i ./resources/audio.wav -f s16le -acodec pcm_s16le ./resources/output.raw"
-#
-# subprocess.call(command, shell=True)
-
-# Instantiates a client
-speech_client = speech.Client()
-
-# The name of the audio file to transcribe
-audio_file = os.path.join(
+video_file = os.path.join(
     os.path.dirname(__file__),
-    'generated-audio',
-    'test.mp3')
+    'resources',
+    'test.mp4')
 
-# Loads the audio into memory
-with io.open(audio_file, 'rb') as audio_file:
-    content = audio_file.read()
-    audio_sample = speech_client.sample(
-        content,
-        source_uri=None,
-        encoding='LINEAR16',
-        sample_rate=16000)
+command = "ffmpeg -i "+video_file+" -ab 160k -ac 2 -ar 44100 -vn ./resources/audio.wav"
 
-alternatives = [];
+subprocess.call(command, shell=True)
 
-# Detects speech in the audio file
-alternatives = speech_client.speech_api.sync_recognize(audio_sample)
 
-for alternative in alternatives:
-    print('Transcript: {}'.format(alternative.transcript))
+speech_to_text = SpeechToTextV1(
+    username='22ccdf7d-47bb-40fe-b175-4d2cff460f85',
+    password='PLPP00eicu2P',
+    x_watson_learning_opt_out=False
+)
+
+print(json.dumps(speech_to_text.models(), indent=2))
+
+print(json.dumps(speech_to_text.get_model('en-US_BroadbandModel'), indent=2))
+
+with open(join(dirname(__file__), './resources/audio.wav'),
+          'rb') as audio_file:
+    print(json.dumps(speech_to_text.recognize(
+        audio_file, content_type='audio/wav', timestamps=True,
+        word_confidence=True),
+        indent=2))
