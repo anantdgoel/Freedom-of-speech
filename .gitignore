@@ -90,3 +90,6 @@ ENV/
 
 # Google SDK
 google-cloud-sdk/
+
+# Generated audio stuff
+generated-audio/**
