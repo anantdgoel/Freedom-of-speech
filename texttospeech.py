@@ -10,5 +10,5 @@ def generateAudio(text, file_name='test', lang='en'):
         supported langs
     """
     tts = gTTS(text=text, lang=lang)
-    tts.save("./generated-audio/{:s}.mp3".format(file_name))
+    tts.save("./generated-audio/{:s}.wav".format(file_name))
     print("Finished generating audio for text:", text)

@@ -2,6 +2,16 @@ import os
 import json
 from os.path import join, dirname
 from watson_developer_cloud import SpeechToTextV1
+import subprocess
+
+video_file = os.path.join(
+    os.path.dirname(__file__),
+    'resources',
+    'test.mp4')
+
+command = "ffmpeg -i "+video_file+" -ab 160k -ac 2 -ar 44100 -vn ./resources/audio.wav"
+
+subprocess.call(command, shell=True)
 
 speech_to_text = SpeechToTextV1(
     username='22ccdf7d-47bb-40fe-b175-4d2cff460f85',
