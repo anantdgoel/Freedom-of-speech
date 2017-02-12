@@ -27,8 +27,7 @@ beat_mfcc_delta = librosa.feature.sync(np.vstack([mfcc, mfcc_delta]),
                                        beat_frames)
 
 # Compute chroma features from the harmonic signal
-chromagram = librosa.feature.chroma_cqt(y=y_harmonic,
-                                        sr=sr)
+chromagram = librosa.feature.chroma_cqt(y=y_harmonic, sr=sr)
 
 # Aggregate chroma features between beat events
 # We'll use the median value of each feature between beat frames
