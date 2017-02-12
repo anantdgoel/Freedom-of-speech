@@ -20,9 +20,9 @@ speech_to_text = SpeechToTextV1(
     x_watson_learning_opt_out=False
 )
 
-print(json.dumps(speech_to_text.models(), indent=2))
-
-print(json.dumps(speech_to_text.get_model('en-US_BroadbandModel'), indent=2))
+# print(json.dumps(speech_to_text.models(), indent=2))
+#
+# print(json.dumps(speech_to_text.get_model('en-US_BroadbandModel'), indent=2))
 
 with open(join(dirname(__file__), './resources/audio.wav'),
           'rb') as audio_file:
